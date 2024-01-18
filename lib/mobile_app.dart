@@ -1,60 +1,61 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooked_bloc/hooked_bloc.dart';
+import 'package:yuletide_team_mate_composer/generated/l10n.dart';
+import 'package:yuletide_team_mate_composer/injectable/injectable.dart';
+import 'package:yuletide_team_mate_composer/utils/hide_keyboard.dart';
+
+const _tabletSize = Size(750, 1334);
+const _mobileSize = Size(375, 667);
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final RootStackRouter _router;
+
+  const MyApp(this._router, {super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      );
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    super.key,
-    required this.title,
-  });
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() => setState(() => _counter++);
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
+  Widget build(BuildContext context) => HookedBlocConfigProvider(
+        injector: () => getIt.get,
+        builderCondition: (state) => state != null,
+        listenerCondition: (state) => state != null,
+        child: _globalUnfocusKeyboard(
+          context: context,
+          child: ScreenUtilInit(
+            designSize: Device.get().isTablet ? _tabletSize : _mobileSize,
+            builder: (_, __) => MaterialApp.router(
+              builder: (_, child) => child ?? const SizedBox.shrink(),
+              routeInformationParser: _router.defaultRouteParser(),
+              routerDelegate: _router.delegate(
+                navigatorObservers: () => [
+                  ...AutoRouterDelegate.defaultNavigatorObserversBuilder(),
+                ],
               ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ],
+              theme: FlexThemeData.light(scheme: FlexScheme.aquaBlue),
+              darkTheme: FlexThemeData.dark(scheme: FlexScheme.aquaBlue),
+              themeMode: ThemeMode.system,
+              localizationsDelegates: const [
+                Strings.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: Strings.delegate.supportedLocales,
+            ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ),
+      );
+
+  Widget _globalUnfocusKeyboard({
+    required BuildContext context,
+    required Widget child,
+  }) =>
+      GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () => hideKeyboard(context),
+        child: child,
       );
 }
