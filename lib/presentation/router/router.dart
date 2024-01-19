@@ -9,8 +9,11 @@ class MainRouter extends $MainRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          page: HomeRoute.page,
+          page: SplashRoute.page,
           initial: true,
+        ),
+        AutoRoute(
+          page: HomeRoute.page,
         ),
       ];
 }
