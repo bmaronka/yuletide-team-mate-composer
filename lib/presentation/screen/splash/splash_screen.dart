@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
-import 'package:yuletide_team_mate_composer/constants/animations.dart';
+import 'package:yuletide_team_mate_composer/constants/rive_animations.dart';
 import 'package:yuletide_team_mate_composer/extensions/build_context_extension.dart';
 import 'package:yuletide_team_mate_composer/generated/assets/assets.gen.dart';
 import 'package:yuletide_team_mate_composer/generated/l10n.dart';
