@@ -1,8 +1,6 @@
-import 'package:yuletide_team_mate_composer/domain/model/rive_model.dart';
-import 'package:yuletide_team_mate_composer/generated/assets/assets.gen.dart';
-
-final merryChristmasAnimation = RiveModel(
-  src: Assets.animations.merryChristmas.path,
-  artboard: 'Character_Animation',
-  stateMachineName: 'State Machine 1',
-);
+class MerryChristmasAnimation {
+  static const artboard = 'Character_Animation';
+  static const stateMachine = 'State Machine 1';
+  static const animation = 'Animation_Loop';
+  static const input1 = 'Character_Middle_l';
+}
