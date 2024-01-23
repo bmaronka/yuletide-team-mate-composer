@@ -60,11 +60,11 @@ class Strings {
     );
   }
 
-  /// `test123`
-  String get test {
+  /// `Tap to continue`
+  String get tapToContinue {
     return Intl.message(
-      'test123',
-      name: 'test',
+      'Tap to continue',
+      name: 'tapToContinue',
       desc: '',
       args: [],
     );

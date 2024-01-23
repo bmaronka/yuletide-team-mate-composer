@@ -9,7 +9,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
-import 'package:flutter/material.dart' as _i4;
 import 'package:yuletide_team_mate_composer/presentation/screen/home/home_screen.dart'
     as _i1;
 import 'package:yuletide_team_mate_composer/presentation/screen/splash/splash_screen.dart'
@@ -27,11 +26,9 @@ abstract class $MainRouter extends _i3.RootStackRouter {
       );
     },
     SplashRoute.name: (routeData) {
-      final args = routeData.argsAs<SplashRouteArgs>(
-          orElse: () => const SplashRouteArgs());
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.SplashScreen(key: args.key),
+        child: const _i2.SplashScreen(),
       );
     },
   };
@@ -53,29 +50,14 @@ class HomeRoute extends _i3.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.SplashScreen]
-class SplashRoute extends _i3.PageRouteInfo<SplashRouteArgs> {
-  SplashRoute({
-    _i4.Key? key,
-    List<_i3.PageRouteInfo>? children,
-  }) : super(
+class SplashRoute extends _i3.PageRouteInfo<void> {
+  const SplashRoute({List<_i3.PageRouteInfo>? children})
+      : super(
           SplashRoute.name,
-          args: SplashRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'SplashRoute';
 
-  static const _i3.PageInfo<SplashRouteArgs> page =
-      _i3.PageInfo<SplashRouteArgs>(name);
-}
-
-class SplashRouteArgs {
-  const SplashRouteArgs({this.key});
-
-  final _i4.Key? key;
-
-  @override
-  String toString() {
-    return 'SplashRouteArgs{key: $key}';
-  }
+  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
 }
