@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooked_bloc/hooked_bloc.dart';
 import 'package:yuletide_team_mate_composer/generated/l10n.dart';
 import 'package:yuletide_team_mate_composer/injectable/injectable.dart';
+import 'package:yuletide_team_mate_composer/style/typography.dart';
 import 'package:yuletide_team_mate_composer/utils/hide_keyboard.dart';
 
 const _tabletSize = Size(750, 1334);
@@ -34,8 +35,14 @@ class MyApp extends StatelessWidget {
                   ...AutoRouterDelegate.defaultNavigatorObserversBuilder(),
                 ],
               ),
-              theme: FlexThemeData.light(scheme: FlexScheme.aquaBlue),
-              darkTheme: FlexThemeData.dark(scheme: FlexScheme.aquaBlue),
+              theme: FlexThemeData.light(
+                scheme: FlexScheme.aquaBlue,
+                fontFamily: StandardTypography.fontFamily,
+              ),
+              darkTheme: FlexThemeData.dark(
+                scheme: FlexScheme.aquaBlue,
+                fontFamily: StandardTypography.fontFamily,
+              ),
               themeMode: ThemeMode.system,
               localizationsDelegates: const [
                 Strings.delegate,

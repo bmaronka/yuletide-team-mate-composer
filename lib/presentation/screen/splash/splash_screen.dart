@@ -6,6 +6,7 @@ import 'package:yuletide_team_mate_composer/extensions/build_context_extension.d
 import 'package:yuletide_team_mate_composer/generated/assets/assets.gen.dart';
 import 'package:yuletide_team_mate_composer/generated/l10n.dart';
 import 'package:yuletide_team_mate_composer/presentation/router/router.gr.dart';
+import 'package:yuletide_team_mate_composer/style/typography.dart';
 
 @RoutePage()
 class SplashScreen extends StatefulWidget {
@@ -15,8 +16,9 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
-  late AnimationController _textAnimationController;
+class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+  late AnimationController _tapToContinueAnimationController;
+  late AnimationController _loadingAnimationController;
   late RiveAnimationController _christmasAnimationController;
 
   late SMITrigger _christmasTrigger;
@@ -24,13 +26,21 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void initState() {
     _christmasAnimationController = SimpleAnimation(MerryChristmasAnimation.animation);
-    _textAnimationController = AnimationController(
+    _loadingAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    );
+    _tapToContinueAnimationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 700),
     );
 
     _christmasAnimationController.isActive = true;
-    Future.delayed(const Duration(seconds: 6), _textAnimationController.forward);
+    _loadingAnimationController.forward();
+    Future.delayed(const Duration(seconds: 6), () {
+      _loadingAnimationController.reverse();
+      _tapToContinueAnimationController.forward();
+    });
 
     super.initState();
   }
@@ -38,7 +48,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   void dispose() {
     _christmasAnimationController.dispose();
-    _textAnimationController.dispose();
+    _loadingAnimationController.dispose();
+    _tapToContinueAnimationController.dispose();
     super.dispose();
   }
 
@@ -53,9 +64,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   void _continueToNextPage() {
-    if (_textAnimationController.isCompleted) {
+    if (_tapToContinueAnimationController.isCompleted) {
       _christmasTrigger.change(true);
-      _textAnimationController.reset();
+      _tapToContinueAnimationController.reset();
       Future.delayed(
         const Duration(seconds: 5),
         () => context.router.push(const HomeRoute()),
@@ -71,7 +82,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
           child: Stack(
             alignment: Alignment.center,
             children: [
-              //TODO add animated loading text
               IgnorePointer(
                 child: Assets.animations.merryChristmas.rive(
                   artboard: MerryChristmasAnimation.artboard,
@@ -81,20 +91,27 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                 ),
               ),
               Positioned(
-                bottom: 0,
+                top: 50,
+                left: 0,
+                right: 0,
+                child: FadeTransition(
+                  opacity: _loadingAnimationController,
+                  child: Text(
+                    Strings.of(context).loading,
+                    style: StandardTypography.header1.copyWith(color: context.getColors().primary),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 5,
                 left: 20,
                 right: 20,
                 child: FadeTransition(
-                  opacity: _textAnimationController,
+                  opacity: _tapToContinueAnimationController,
                   child: Text(
                     Strings.of(context).tapToContinue,
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: context.getColors().primary,
-                      fontFamily: 'Lato',
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: StandardTypography.header1.copyWith(color: context.getColors().primary),
                     textAlign: TextAlign.center,
                   ),
                 ),

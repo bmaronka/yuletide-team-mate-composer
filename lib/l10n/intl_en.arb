@@ -1,4 +1,5 @@
 {
   "locale": "en",
-  "tapToContinue": "Tap to continue"
+  "tapToContinue": "Tap to continue",
+  "loading": "Loading\u2026"
 }

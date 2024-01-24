@@ -12,4 +12,7 @@ class FontFamily {
 
   /// Font family: DancingScript
   static const String dancingScript = 'DancingScript';
+
+  /// Font family: Lato
+  static const String lato = 'Lato';
 }
