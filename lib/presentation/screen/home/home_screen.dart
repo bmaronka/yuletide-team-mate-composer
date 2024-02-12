@@ -25,8 +25,7 @@ class HomeScreen extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useAnimationController();
     final isOpened = useState(false);
-    final activeScreen = useState<Widget>(const GenerateTeamScreen());
-
+    final activeRoute = useState(AppRoute.getRouteFromPath(context.router.currentPath));
     final drawerListener = useCallback(
       () => isOpened.value ? controller.forward() : controller.reverse(),
       [],
@@ -46,13 +45,22 @@ class HomeScreen extends HookWidget {
     );
 
     final changeScreen = useCallback(
-      (AppRoute route) => activeScreen.value = switch (route) {
-        AppRoute.generateTeam => const GenerateTeamScreen(),
-        AppRoute.profile => const ProfileScreen(),
-        AppRoute.notifications => const NotificationsScreen(),
-        AppRoute.settings => const SettingsScreen(),
-        _ => const SizedBox(),
+      (AppRoute route) {
+        activeRoute.value = route;
+        context.router.navigate(route.route);
       },
+      [],
+    );
+
+    final getScreenFromRoute = useCallback(
+      () =>
+          {
+            AppRoute.generateTeam: const GenerateTeamScreen(),
+            AppRoute.profile: const ProfileScreen(),
+            AppRoute.notifications: const NotificationsScreen(),
+            AppRoute.settings: const SettingsScreen(),
+          }[activeRoute.value] ??
+          const GenerateTeamScreen(),
       [],
     );
 
@@ -63,7 +71,7 @@ class HomeScreen extends HookWidget {
           DisplayedChildWrapper(
             controller: controller,
             onTap: isOpened.value ? toggleDrawer : null,
-            child: activeScreen.value,
+            child: getScreenFromRoute(),
           ),
           AnimatedDrawer(
             controller: controller,

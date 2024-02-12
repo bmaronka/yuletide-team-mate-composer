@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -26,7 +27,11 @@ class MyApp extends StatelessWidget {
         child: _globalUnfocusKeyboard(
           context: context,
           child: ScreenUtilInit(
-            designSize: Device.get().isTablet ? _tabletSize : _mobileSize,
+            designSize: kIsWeb
+                ? ScreenUtil.defaultSize
+                : Device.get().isTablet
+                    ? _tabletSize
+                    : _mobileSize,
             builder: (_, __) => MaterialApp.router(
               builder: (_, child) => child ?? const SizedBox.shrink(),
               routeInformationParser: _router.defaultRouteParser(),

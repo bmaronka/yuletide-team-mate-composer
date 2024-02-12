@@ -51,7 +51,7 @@ class SplashScreen extends HookWidget {
           tapToContinueAnimationController.reset();
           Future.delayed(
             const Duration(milliseconds: _animationDelayTime),
-            () => context.router.replaceNamed(AppRoute.home.path),
+            () => context.router.push(AppRoute.home.route),
           );
         }
       },
