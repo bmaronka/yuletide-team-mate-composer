@@ -6,9 +6,13 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yuletide_team_mate_composer/extensions/build_context_extension.dart';
+import 'package:yuletide_team_mate_composer/presentation/router/router.dart';
 import 'package:yuletide_team_mate_composer/presentation/screen/generate_team/generate_team_screen.dart';
 import 'package:yuletide_team_mate_composer/presentation/screen/home/widgets/animated_drawer.dart';
 import 'package:yuletide_team_mate_composer/presentation/screen/home/widgets/animated_drawer_icon.dart';
+import 'package:yuletide_team_mate_composer/presentation/screen/notifications/notifications_screen.dart';
+import 'package:yuletide_team_mate_composer/presentation/screen/profile/profile_screen.dart';
+import 'package:yuletide_team_mate_composer/presentation/screen/settings/settings_screen.dart';
 
 final _animationDuration = .2.seconds;
 final _drawerWidth = 260.w;
@@ -21,6 +25,7 @@ class HomeScreen extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useAnimationController();
     final isOpened = useState(false);
+    final activeScreen = useState<Widget>(const GenerateTeamScreen());
 
     final drawerListener = useCallback(
       () => isOpened.value ? controller.forward() : controller.reverse(),
@@ -35,7 +40,21 @@ class HomeScreen extends HookWidget {
       [],
     );
 
-    final toggleDrawer = useCallback(() => isOpened.value = !isOpened.value);
+    final toggleDrawer = useCallback(
+      () => isOpened.value = !isOpened.value,
+      [],
+    );
+
+    final changeScreen = useCallback(
+      (AppRoute route) => activeScreen.value = switch (route) {
+        AppRoute.generateTeam => const GenerateTeamScreen(),
+        AppRoute.profile => const ProfileScreen(),
+        AppRoute.notifications => const NotificationsScreen(),
+        AppRoute.settings => const SettingsScreen(),
+        _ => const SizedBox(),
+      },
+      [],
+    );
 
     return Scaffold(
       backgroundColor: context.getColors().background,
@@ -44,12 +63,13 @@ class HomeScreen extends HookWidget {
           DisplayedChildWrapper(
             controller: controller,
             onTap: isOpened.value ? toggleDrawer : null,
-            child: const GenerateTeamScreen(),
+            child: activeScreen.value,
           ),
           AnimatedDrawer(
             controller: controller,
             width: _drawerWidth,
             animationDuration: _animationDuration,
+            onItemTap: changeScreen,
           ),
           AnimatedDrawerIcon(
             controller: controller,

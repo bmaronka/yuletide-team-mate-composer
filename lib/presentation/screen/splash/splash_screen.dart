@@ -7,7 +7,7 @@ import 'package:yuletide_team_mate_composer/constants/rive_animations.dart';
 import 'package:yuletide_team_mate_composer/extensions/build_context_extension.dart';
 import 'package:yuletide_team_mate_composer/generated/assets/assets.gen.dart';
 import 'package:yuletide_team_mate_composer/generated/l10n.dart';
-import 'package:yuletide_team_mate_composer/presentation/router/router.gr.dart';
+import 'package:yuletide_team_mate_composer/presentation/router/router.dart';
 import 'package:yuletide_team_mate_composer/style/typography.dart';
 
 const _animationTime = 600;
@@ -51,7 +51,7 @@ class SplashScreen extends HookWidget {
           tapToContinueAnimationController.reset();
           Future.delayed(
             const Duration(milliseconds: _animationDelayTime),
-            () => context.router.push(const HomeRoute()),
+            () => context.router.replaceNamed(AppRoute.home.path),
           );
         }
       },

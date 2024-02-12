@@ -11,12 +11,14 @@ class AnimatedDrawer extends StatelessWidget {
     required this.controller,
     required this.width,
     required this.animationDuration,
+    required this.onItemTap,
     super.key,
   });
 
   final AnimationController controller;
   final double width;
   final Duration animationDuration;
+  final Function(AppRoute) onItemTap;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -29,6 +31,7 @@ class AnimatedDrawer extends StatelessWidget {
           separatorBuilder: (_, __) => Gap(8.h),
           itemBuilder: (context, index) => DrawerItem(
             route: AppRoute.drawerRoutes[index],
+            onTap: () => onItemTap(AppRoute.drawerRoutes[index]),
           ),
         ),
       ).animate(controller: controller, autoPlay: false).moveX(begin: -width, end: 0, duration: animationDuration);
@@ -37,10 +40,12 @@ class AnimatedDrawer extends StatelessWidget {
 class DrawerItem extends StatelessWidget {
   const DrawerItem({
     required this.route,
+    required this.onTap,
     super.key,
   });
 
   final AppRoute route;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) => Material(
@@ -50,6 +55,7 @@ class DrawerItem extends StatelessWidget {
         ),
         color: context.getColors().lightBlue,
         child: InkWell(
+          onTap: onTap,
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(20.r),
             bottomRight: Radius.circular(20.r),
