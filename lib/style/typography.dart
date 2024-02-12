@@ -13,4 +13,10 @@ class StandardTypography {
     height: 1.1,
     leadingDistribution: TextLeadingDistribution.even,
   );
+  static final header2 = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w700,
+    height: 1.1,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
 }
