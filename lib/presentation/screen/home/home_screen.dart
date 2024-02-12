@@ -44,7 +44,7 @@ class HomeScreen extends HookWidget {
       [],
     );
 
-    final changeScreen = useCallback(
+    final changeRoute = useCallback(
       (AppRoute route) {
         activeRoute.value = route;
         context.router.navigate(route.route);
@@ -77,7 +77,8 @@ class HomeScreen extends HookWidget {
             controller: controller,
             width: _drawerWidth,
             animationDuration: _animationDuration,
-            onItemTap: changeScreen,
+            onItemTap: changeRoute,
+            activeRoute: activeRoute.value,
           ),
           AnimatedDrawerIcon(
             controller: controller,

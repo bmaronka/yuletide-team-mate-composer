@@ -12,6 +12,7 @@ class AnimatedDrawer extends StatelessWidget {
     required this.width,
     required this.animationDuration,
     required this.onItemTap,
+    required this.activeRoute,
     super.key,
   });
 
@@ -19,6 +20,7 @@ class AnimatedDrawer extends StatelessWidget {
   final double width;
   final Duration animationDuration;
   final Function(AppRoute) onItemTap;
+  final AppRoute activeRoute;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -29,10 +31,14 @@ class AnimatedDrawer extends StatelessWidget {
           itemCount: AppRoute.drawerRoutes.length,
           physics: const NeverScrollableScrollPhysics(),
           separatorBuilder: (_, __) => Gap(8.h),
-          itemBuilder: (context, index) => DrawerItem(
-            route: AppRoute.drawerRoutes[index],
-            onTap: () => onItemTap(AppRoute.drawerRoutes[index]),
-          ),
+          itemBuilder: (context, index) {
+            final route = AppRoute.drawerRoutes[index];
+            return DrawerItem(
+              route: route,
+              onTap: () => onItemTap(route),
+              selected: activeRoute == route,
+            );
+          },
         ),
       ).animate(controller: controller, autoPlay: false).moveX(begin: -width, end: 0, duration: animationDuration);
 }
@@ -41,11 +47,13 @@ class DrawerItem extends StatelessWidget {
   const DrawerItem({
     required this.route,
     required this.onTap,
+    required this.selected,
     super.key,
   });
 
   final AppRoute route;
   final VoidCallback onTap;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) => Material(
@@ -53,7 +61,7 @@ class DrawerItem extends StatelessWidget {
           topRight: Radius.circular(20.r),
           bottomRight: Radius.circular(20.r),
         ),
-        color: context.getColors().lightBlue,
+        color: selected ? context.getColors().lightBlue : context.getColors().background,
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.only(
