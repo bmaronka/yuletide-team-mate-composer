@@ -30,11 +30,11 @@ class AnimatedDrawerIcon extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color.lerp(context.getColors().background, context.getColors().white, value),
+                color: Color.lerp(context.getColors().olive, context.getColors().white, value),
               ),
               child: Icon(
                 isOpened ? Icons.close : Icons.menu,
-                color: Color.lerp(context.getColors().white, context.getColors().background, value),
+                color: Color.lerp(context.getColors().white, context.getColors().olive, value),
               ),
             ),
           ),

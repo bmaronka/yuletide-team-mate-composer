@@ -11,13 +11,11 @@ class StandardTypography {
     fontSize: 36.sp,
     height: 1.1,
     leadingDistribution: TextLeadingDistribution.even,
-    fontFamily: lato,
   );
   static final header2 = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeight.w700,
     height: 1.1,
     leadingDistribution: TextLeadingDistribution.even,
-    fontFamily: lato,
   );
 }

@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:yuletide_team_mate_composer/presentation/router/router.gr.dart';
 
 enum AppRoute {
-  splash('Splash', '/'),
-  home('Home', '/home'),
+  splash('Splash'),
+  home('Home'),
   generateTeam('Generate team', '/home', Icons.diversity_3),
   profile('Profile', '/home/profile', Icons.person),
   notifications('Notifications', '/home/notifications', Icons.notifications),
   settings('Settings', '/home/settings', Icons.settings);
 
   const AppRoute(
-    this.name,
-    this.path, [
+    this.name, [
+    this.path,
     this.icon,
   ]);
 
   final String name;
-  final String path;
+  final String? path;
   final IconData? icon;
 
   PageRouteInfo<void> get route => switch (this) {

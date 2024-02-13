@@ -24,7 +24,7 @@ class AnimatedDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.only(right: 16.w, top: 60.h),
+        padding: EdgeInsets.only(top: 60.h),
         width: width,
         height: MediaQuery.sizeOf(context).height,
         child: ListView.separated(
@@ -37,6 +37,7 @@ class AnimatedDrawer extends StatelessWidget {
               route: route,
               onTap: () => onItemTap(route),
               selected: activeRoute == route,
+              width: width,
             );
           },
         ),
@@ -48,37 +49,52 @@ class DrawerItem extends StatelessWidget {
     required this.route,
     required this.onTap,
     required this.selected,
+    required this.width,
     super.key,
   });
 
   final AppRoute route;
   final VoidCallback onTap;
   final bool selected;
+  final double width;
 
   @override
-  Widget build(BuildContext context) => Material(
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20.r),
-          bottomRight: Radius.circular(20.r),
-        ),
-        color: selected ? context.getColors().lightBlue : context.getColors().background,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20.r),
-            bottomRight: Radius.circular(20.r),
-          ),
-          child: ListTile(
-            leading: Icon(
-              route.icon,
-              color: context.getColors().white,
-            ),
-            minLeadingWidth: 16.w,
-            title: Text(
-              route.name,
-              style: StandardTypography.header2.copyWith(color: context.getColors().white),
+  Widget build(BuildContext context) => Stack(
+        children: [
+          AnimatedPositioned(
+            duration: .3.seconds,
+            left: selected ? 0 : -width,
+            child: Material(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(30.r),
+                bottomRight: Radius.circular(30.r),
+              ),
+              color: context.getColors().lightOlive,
+              child: SizedBox(
+                width: width - 16.w,
+                height: 56,
+              ),
             ),
           ),
-        ),
+          InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(30.r),
+              bottomRight: Radius.circular(30.r),
+            ),
+            splashColor: context.getColors().transparent,
+            child: ListTile(
+              leading: Icon(
+                route.icon,
+                color: context.getColors().white,
+              ),
+              minLeadingWidth: 16.w,
+              title: Text(
+                route.name,
+                style: StandardTypography.header2.copyWith(color: context.getColors().white),
+              ),
+            ),
+          ),
+        ],
       );
 }

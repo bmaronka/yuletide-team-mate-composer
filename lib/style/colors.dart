@@ -2,35 +2,45 @@ import 'package:flutter/material.dart';
 
 class YTMCColorTheme {
   const YTMCColorTheme({
-    required this.yellow,
     required this.white,
+    required this.transparent,
     required this.background,
-    required this.lightBlue,
+    required this.yellow,
+    required this.olive,
+    required this.lightOlive,
   });
 
-  final Color yellow;
   final Color white;
+  final Color transparent;
   final Color background;
-  final Color lightBlue;
+  final Color yellow;
+  final Color olive;
+  final Color lightOlive;
 
   static YTMCColorTheme get lightTheme => const YTMCColorTheme(
-        yellow: AppColors.yellow,
         white: AppColors.white,
+        transparent: AppColors.transparent,
         background: AppColors.background,
-        lightBlue: AppColors.lightBlue,
+        yellow: AppColors.yellow,
+        olive: AppColors.olive,
+        lightOlive: AppColors.lightOlive,
       );
 
   static YTMCColorTheme get darkTheme => const YTMCColorTheme(
-        yellow: AppColors.yellow,
         white: AppColors.white,
+        transparent: AppColors.transparent,
         background: AppColors.background,
-        lightBlue: AppColors.lightBlue,
+        yellow: AppColors.yellow,
+        olive: AppColors.olive,
+        lightOlive: AppColors.lightOlive,
       );
 }
 
 class AppColors {
-  static const Color yellow = Color(0xFFE09200);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color transparent = Color(0x00000000);
   static const Color background = Color(0xFFFFF7F1);
-  static const Color lightBlue = Color(0xFF90a5cc);
+  static const Color yellow = Color(0xFFE09200);
+  static const Color olive = Color(0xFF9CB380);
+  static const Color lightOlive = Color(0xFFAFC299);
 }

@@ -65,7 +65,7 @@ class HomeScreen extends HookWidget {
     );
 
     return Scaffold(
-      backgroundColor: context.getColors().background,
+      backgroundColor: context.getColors().olive,
       body: Stack(
         children: [
           DisplayedChildWrapper(
