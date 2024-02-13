@@ -10,9 +10,9 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: DancingScript
-  static const String dancingScript = 'DancingScript';
-
   /// Font family: Lato
   static const String lato = 'Lato';
+
+  /// Font family: PlayfairDisplay
+  static const String playfairDisplay = 'PlayfairDisplay';
 }

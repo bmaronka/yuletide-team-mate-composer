@@ -2,16 +2,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rive/rive.dart';
 import 'package:yuletide_team_mate_composer/constants/rive_animations.dart';
 import 'package:yuletide_team_mate_composer/extensions/build_context_extension.dart';
 import 'package:yuletide_team_mate_composer/generated/assets/assets.gen.dart';
+import 'package:yuletide_team_mate_composer/generated/assets/fonts.gen.dart';
 import 'package:yuletide_team_mate_composer/generated/l10n.dart';
 import 'package:yuletide_team_mate_composer/presentation/router/router.dart';
 import 'package:yuletide_team_mate_composer/style/typography.dart';
 
 const _animationTime = 600;
-const _animationDelayTime = 6000;
+const _animationDelayTime = 5000;
 const _tapToContinueAnimationDelayTime = _animationDelayTime + 2 * _animationTime;
 
 @RoutePage()
@@ -59,55 +61,48 @@ class SplashScreen extends HookWidget {
     );
 
     return Scaffold(
+      backgroundColor: context.getColors().background,
       body: GestureDetector(
         onTap: continueToNextPage,
         behavior: HitTestBehavior.translucent,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            IgnorePointer(
-              child: Assets.animations.merryChristmas.rive(
-                artboard: MerryChristmasAnimation.artboard,
-                fit: BoxFit.fill,
-                controllers: [christmasAnimationController.value],
-                onInit: riveAnimationInit,
+        child: SizedBox(
+          height: MediaQuery.sizeOf(context).height,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              IgnorePointer(
+                child: SizedBox(
+                  height: 325.h,
+                  child: Assets.animations.merryChristmas.rive(
+                    artboard: MerryChristmasAnimation.artboard,
+                    fit: BoxFit.fill,
+                    controllers: [christmasAnimationController.value],
+                    onInit: riveAnimationInit,
+                  ),
+                ),
               ),
-            ),
-            Positioned(
-              top: 50,
-              left: 0,
-              right: 0,
-              child: Text(
-                Strings.of(context).loading,
-                style: StandardTypography.header1.copyWith(color: context.getColors().primary),
-                textAlign: TextAlign.center,
-              )
-                  .animate(
-                    onComplete: (controller) => Future.delayed(
-                      const Duration(milliseconds: _animationDelayTime),
-                      controller.reverse,
-                    ),
-                  )
-                  .fadeIn(duration: const Duration(milliseconds: _animationTime))
-                  .scale(),
-            ),
-            Positioned(
-              bottom: 30,
-              left: 20,
-              right: 20,
-              child: Text(
-                Strings.of(context).tapToContinue,
-                style: StandardTypography.header1.copyWith(color: context.getColors().primary),
-                textAlign: TextAlign.center,
-              )
-                  .animate(
-                    controller: tapToContinueAnimationController,
-                    delay: const Duration(milliseconds: _tapToContinueAnimationDelayTime),
-                  )
-                  .fadeIn(duration: const Duration(milliseconds: _animationTime))
-                  .scale(),
-            ),
-          ],
+              Positioned(
+                bottom: 110.h,
+                left: 20.w,
+                right: 20.w,
+                child: Text(
+                  Strings.of(context).tapToContinue,
+                  style: StandardTypography.header1.copyWith(
+                    color: context.getColors().yellow,
+                    fontFamily: FontFamily.playfairDisplay,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                )
+                    .animate(
+                      controller: tapToContinueAnimationController,
+                      delay: const Duration(milliseconds: _tapToContinueAnimationDelayTime),
+                    )
+                    .fadeIn(duration: const Duration(milliseconds: _animationTime))
+                    .scale(),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -52,12 +52,32 @@ flutter:
   assets:
     - assets/animations/
   fonts:
-    - family: DancingScript
-      fonts:
-        - asset: assets/fonts/DancingScript-Bold.ttf
     - family: Lato
       fonts:
-        - asset: assets/fonts/Lato-Black.ttf
+        - asset: assets/fonts/lato/Lato-Black.ttf
+        - asset: assets/fonts/lato/Lato-BlackItalic.ttf
+        - asset: assets/fonts/lato/Lato-Bold.ttf
+        - asset: assets/fonts/lato/Lato-BoldItalic.ttf
+        - asset: assets/fonts/lato/Lato-Italic.ttf
+        - asset: assets/fonts/lato/Lato-Light.ttf
+        - asset: assets/fonts/lato/Lato-LightItalic.ttf
+        - asset: assets/fonts/lato/Lato-Regular.ttf
+        - asset: assets/fonts/lato/Lato-Thin.ttf
+        - asset: assets/fonts/lato/Lato-ThinItalic.ttf
+    - family: PlayfairDisplay
+      fonts:
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-Black.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-BlackItalic.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-Bold.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-BoldItalic.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-ExtraBold.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-ExtraBoldItalic.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-Italic.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-Medium.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-MediumItalic.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-Regular.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-SemiBold.ttf
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-SemiBoldItalic.ttf
 
 flutter_intl:
   enabled: true

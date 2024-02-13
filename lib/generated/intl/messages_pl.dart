@@ -22,7 +22,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "loading": MessageLookupByLibrary.simpleMessage("Ładowanie…"),
         "locale": MessageLookupByLibrary.simpleMessage("pl"),
         "tapToContinue":
             MessageLookupByLibrary.simpleMessage("Naciśnij, aby kontynuować")

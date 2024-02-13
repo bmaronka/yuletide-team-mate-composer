@@ -42,11 +42,11 @@ class MyApp extends StatelessWidget {
               ),
               theme: FlexThemeData.light(
                 scheme: FlexScheme.aquaBlue,
-                fontFamily: StandardTypography.fontFamily,
+                fontFamily: StandardTypography.lato,
               ),
               darkTheme: FlexThemeData.dark(
                 scheme: FlexScheme.aquaBlue,
-                fontFamily: StandardTypography.fontFamily,
+                fontFamily: StandardTypography.lato,
               ),
               themeMode: ThemeMode.system,
               localizationsDelegates: const [
