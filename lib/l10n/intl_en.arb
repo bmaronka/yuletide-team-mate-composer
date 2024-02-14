@@ -1,4 +1,8 @@
 {
   "locale": "en",
-  "tapToContinue": "Tap to continue"
+  "tapToContinue": "Tap to continue",
+  "generateTeam": "Generate team",
+  "profile": "Profile",
+  "notifications": "Notifications",
+  "settings": "Settings"
 }

@@ -1,4 +1,8 @@
 {
   "locale": "pl",
-  "tapToContinue": "Naciśnij, aby kontynuować"
+  "tapToContinue": "Naciśnij, aby kontynuować",
+  "generateTeam": "Generuj drużynę",
+  "profile": "Profil",
+  "notifications": "Powiadomienia",
+  "settings": "Ustawienia"
 }

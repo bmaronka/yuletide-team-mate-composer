@@ -13,6 +13,7 @@ import 'package:yuletide_team_mate_composer/presentation/screen/home/widgets/ani
 import 'package:yuletide_team_mate_composer/presentation/screen/notifications/notifications_screen.dart';
 import 'package:yuletide_team_mate_composer/presentation/screen/profile/profile_screen.dart';
 import 'package:yuletide_team_mate_composer/presentation/screen/settings/settings_screen.dart';
+import 'package:yuletide_team_mate_composer/utils/hide_keyboard.dart';
 
 final _animationDuration = .2.seconds;
 final _drawerWidth = 260.w;
@@ -40,7 +41,10 @@ class HomeScreen extends HookWidget {
     );
 
     final toggleDrawer = useCallback(
-      () => isOpened.value = !isOpened.value,
+      () {
+        hideKeyboard(context);
+        isOpened.value = !isOpened.value;
+      },
       [],
     );
 
@@ -64,29 +68,33 @@ class HomeScreen extends HookWidget {
       [],
     );
 
-    return Scaffold(
-      backgroundColor: context.getColors().olive,
-      body: Stack(
-        children: [
-          DisplayedChildWrapper(
-            controller: controller,
-            onTap: isOpened.value ? toggleDrawer : null,
-            child: getScreenFromRoute(),
-          ),
-          AnimatedDrawer(
-            controller: controller,
-            width: _drawerWidth,
-            animationDuration: _animationDuration,
-            onItemTap: changeRoute,
-            activeRoute: activeRoute.value,
-          ),
-          AnimatedDrawerIcon(
-            controller: controller,
-            animationDuration: _animationDuration,
-            onTap: toggleDrawer,
-            isOpened: isOpened.value,
-          ),
-        ],
+    return Animate(controller: controller, autoPlay: false).custom(
+      duration: _animationDuration,
+      builder: (_, value, __) => Scaffold(
+        backgroundColor: Color.lerp(context.getColors().background, context.getColors().olive, value),
+        body: Stack(
+          children: [
+            DisplayedChildWrapper(
+              controller: controller,
+              onTap: toggleDrawer,
+              isOpened: isOpened.value,
+              child: getScreenFromRoute(),
+            ),
+            AnimatedDrawer(
+              controller: controller,
+              width: _drawerWidth,
+              animationDuration: _animationDuration,
+              onItemTap: changeRoute,
+              activeRoute: activeRoute.value,
+            ),
+            AnimatedDrawerIcon(
+              controller: controller,
+              animationDuration: _animationDuration,
+              onTap: toggleDrawer,
+              isOpened: isOpened.value,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -96,32 +104,39 @@ class DisplayedChildWrapper extends StatelessWidget {
   const DisplayedChildWrapper({
     required this.controller,
     required this.onTap,
+    required this.isOpened,
     required this.child,
     super.key,
   });
 
   final AnimationController controller;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
+  final bool isOpened;
   final Widget child;
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: onTap,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30.r),
+        behavior: HitTestBehavior.translucent,
+        onTap: isOpened ? onTap : null,
+        child: IgnorePointer(
+          ignoring: isOpened,
           child: child,
-        )
-            .animate(controller: controller, autoPlay: false)
-            .scaleY(begin: 1, end: 0.85, duration: _animationDuration)
-            .custom(
-              builder: (_, value, child) => Transform(
-                alignment: Alignment.center,
-                transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.001)
-                  ..translate(value * _drawerWidth, 0)
-                  ..rotateY(value - value * pi / 6),
+        ),
+      )
+          .animate(controller: controller, autoPlay: false)
+          .custom(
+            duration: _animationDuration,
+            builder: (_, value, child) => Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.identity()
+                ..setEntry(3, 2, 0.001)
+                ..translate(value * _drawerWidth, 0)
+                ..rotateY(value - value * pi / 6),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(value * 30.r),
                 child: child,
               ),
             ),
-      );
+          )
+          .scaleY(begin: 1, end: 0.85);
 }

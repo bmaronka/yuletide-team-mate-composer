@@ -22,7 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "generateTeam": MessageLookupByLibrary.simpleMessage("Generuj drużynę"),
         "locale": MessageLookupByLibrary.simpleMessage("pl"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Powiadomienia"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profil"),
+        "settings": MessageLookupByLibrary.simpleMessage("Ustawienia"),
         "tapToContinue":
             MessageLookupByLibrary.simpleMessage("Naciśnij, aby kontynuować")
       };

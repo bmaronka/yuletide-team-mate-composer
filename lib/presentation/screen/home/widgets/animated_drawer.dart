@@ -24,7 +24,7 @@ class AnimatedDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.only(top: 60.h),
+        padding: EdgeInsets.only(top: 70.h),
         width: width,
         height: MediaQuery.sizeOf(context).height,
         child: ListView.separated(
