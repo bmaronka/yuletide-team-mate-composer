@@ -81,15 +81,13 @@ class HomeScreen extends HookWidget {
               child: getScreenFromRoute(),
             ),
             AnimatedDrawer(
-              controller: controller,
               width: _drawerWidth,
-              animationDuration: _animationDuration,
+              animationValue: value,
               onItemTap: changeRoute,
               activeRoute: activeRoute.value,
             ),
             AnimatedDrawerIcon(
-              controller: controller,
-              animationDuration: _animationDuration,
+              animationValue: value,
               onTap: toggleDrawer,
               isOpened: isOpened.value,
             ),

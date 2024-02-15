@@ -8,25 +8,24 @@ import 'package:yuletide_team_mate_composer/style/typography.dart';
 
 class AnimatedDrawer extends StatelessWidget {
   const AnimatedDrawer({
-    required this.controller,
     required this.width,
-    required this.animationDuration,
+    required this.animationValue,
     required this.onItemTap,
     required this.activeRoute,
     super.key,
   });
 
-  final AnimationController controller;
   final double width;
-  final Duration animationDuration;
+  final double animationValue;
   final Function(AppRoute) onItemTap;
   final AppRoute activeRoute;
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.only(top: 70.h),
-        width: width,
+  Widget build(BuildContext context) => Positioned(
+        top: 70.h,
+        left: -width * (1 - animationValue),
         height: MediaQuery.sizeOf(context).height,
+        width: width,
         child: ListView.separated(
           itemCount: AppRoute.drawerRoutes.length,
           physics: const NeverScrollableScrollPhysics(),
@@ -41,7 +40,7 @@ class AnimatedDrawer extends StatelessWidget {
             );
           },
         ),
-      ).animate(controller: controller, autoPlay: false).moveX(begin: -width, end: 0, duration: animationDuration);
+      );
 }
 
 class DrawerItem extends StatelessWidget {
