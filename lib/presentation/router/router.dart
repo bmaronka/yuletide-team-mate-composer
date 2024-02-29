@@ -65,12 +65,13 @@ class MainRouter extends $MainRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: SplashRoute.page,
-          path: '/',
-          initial: true,
-        ),
+          // path: '/',
+          // initial: true,
+        ), //TODO uncomment
         AutoRoute(
           page: HomeRoute.page,
           path: '/home',
+          initial: true,
           children: [
             CustomRoute(
               page: GenerateTeamRoute.page,

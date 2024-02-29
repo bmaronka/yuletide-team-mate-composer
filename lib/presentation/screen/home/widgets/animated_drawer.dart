@@ -71,7 +71,7 @@ class DrawerItem extends StatelessWidget {
               color: context.getColors().lightOlive,
               child: SizedBox(
                 width: width - 16.w,
-                height: 56,
+                height: 42.h,
               ),
             ),
           ),
@@ -90,7 +90,7 @@ class DrawerItem extends StatelessWidget {
               minLeadingWidth: 16.w,
               title: Text(
                 route.name,
-                style: StandardTypography.header2.copyWith(color: context.getColors().white),
+                style: StandardTypography.header3.copyWith(color: context.getColors().white),
               ),
             ),
           ),

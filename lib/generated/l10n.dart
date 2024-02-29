@@ -109,6 +109,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Enter player's name`
+  String get namePlaceholder {
+    return Intl.message(
+      'Enter player\'s name',
+      name: 'namePlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

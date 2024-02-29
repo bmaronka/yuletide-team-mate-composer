@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "generateTeam": MessageLookupByLibrary.simpleMessage("Generuj drużynę"),
         "locale": MessageLookupByLibrary.simpleMessage("pl"),
+        "namePlaceholder":
+            MessageLookupByLibrary.simpleMessage("Podaj imię gracza"),
         "notifications": MessageLookupByLibrary.simpleMessage("Powiadomienia"),
         "profile": MessageLookupByLibrary.simpleMessage("Profil"),
         "settings": MessageLookupByLibrary.simpleMessage("Ustawienia"),

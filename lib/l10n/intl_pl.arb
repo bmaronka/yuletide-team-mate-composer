@@ -4,5 +4,6 @@
   "generateTeam": "Generuj drużynę",
   "profile": "Profil",
   "notifications": "Powiadomienia",
-  "settings": "Ustawienia"
+  "settings": "Ustawienia",
+  "namePlaceholder": "Podaj imię gracza"
 }

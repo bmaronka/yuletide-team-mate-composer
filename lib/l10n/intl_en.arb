@@ -4,5 +4,6 @@
   "generateTeam": "Generate team",
   "profile": "Profile",
   "notifications": "Notifications",
-  "settings": "Settings"
+  "settings": "Settings",
+  "namePlaceholder": "Enter player's name"
 }

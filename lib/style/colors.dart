@@ -8,6 +8,7 @@ class YTMCColorTheme {
     required this.yellow,
     required this.olive,
     required this.lightOlive,
+    required this.red,
   });
 
   final Color white;
@@ -16,6 +17,7 @@ class YTMCColorTheme {
   final Color yellow;
   final Color olive;
   final Color lightOlive;
+  final Color red;
 
   static YTMCColorTheme get lightTheme => const YTMCColorTheme(
         white: AppColors.white,
@@ -24,6 +26,7 @@ class YTMCColorTheme {
         yellow: AppColors.yellow,
         olive: AppColors.olive,
         lightOlive: AppColors.lightOlive,
+        red: AppColors.red,
       );
 
   static YTMCColorTheme get darkTheme => const YTMCColorTheme(
@@ -33,6 +36,7 @@ class YTMCColorTheme {
         yellow: AppColors.yellow,
         olive: AppColors.olive,
         lightOlive: AppColors.lightOlive,
+        red: AppColors.red,
       );
 }
 
@@ -43,4 +47,5 @@ class AppColors {
   static const Color yellow = Color(0xFFE09200);
   static const Color olive = Color(0xFF9CB380);
   static const Color lightOlive = Color(0xFFAFC299);
+  static const Color red = Color(0xFF6E0D25);
 }
